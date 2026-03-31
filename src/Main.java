@@ -1,10 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Main.java — Demo Hotel Management System
- * Menunjukkan penggunaan seluruh class dalam sistem.
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -26,7 +22,7 @@ public class Main {
         StandardRoom kamar102 = new StandardRoom("102", 350_000, stdFasilitas);
 
         List<String> dlxFasilitas = Arrays.asList("AC", "TV 55\"", "WiFi", "Bathtub",
-                                                    "Minibar", "Safe Box", "City View");
+                "Minibar", "Safe Box", "City View");
         DeluxeRoom kamarD201 = new DeluxeRoom("D-201", 800_000, dlxFasilitas, 150_000);
         DeluxeRoom kamarD202 = new DeluxeRoom("D-202", 800_000, dlxFasilitas, 150_000);
 
@@ -42,39 +38,38 @@ public class Main {
         System.out.println("\n─── Data Tamu ───");
 
         Guest tamu1 = new Guest(
-            "3374011234560001",  // NIK
-            "Semarang",          // domicile
-            "Budi Santoso",      // name
-            "1990-05-15",        // dateOfBirth
-            "Laki-laki",         // gender
-            "081234567890"       // phoneNumber
+                "3374011234560001", // NIK
+                "Semarang", // domicile
+                "Budi Santoso", // name
+                "1990-05-15", // dateOfBirth
+                "Laki-laki", // gender
+                "081234567890" // phoneNumber
         );
         tamu1.displayProfile();
 
         System.out.println();
         Guest tamu2 = new Guest(
-            "3374019876540002",
-            "Yogyakarta",
-            "Sari Dewi",
-            "1995-11-20",
-            "Perempuan",
-            "082345678901"
-        );
+                "3374019876540002",
+                "Yogyakarta",
+                "Sari Dewi",
+                "1995-11-20",
+                "Perempuan",
+                "082345678901");
         tamu2.displayProfile();
 
         // ── 5. Membuat karyawan (Employee) ────────────────────────────────────
         System.out.println("\n─── Data Karyawan ───");
 
         Employee emp1 = new Employee(
-            "EMP-001",           // id
-            5_000_000,           // salary
-            "Resepsionis",       // position
-            "2020-03-01",        // hireDate
-            "Andi Wijaya",       // name
-            "1998-07-10",        // dateOfBirth
-            "Laki-laki",         // gender
-            "081122334455",      // phoneNumber
-            "Jl. Anggrek No. 5, Semarang" // address
+                "EMP-001", // id
+                5_000_000, // salary
+                "Resepsionis", // position
+                "2020-03-01", // hireDate
+                "Andi Wijaya", // name
+                "1998-07-10", // dateOfBirth
+                "Laki-laki", // gender
+                "081122334455", // phoneNumber
+                "Jl. Anggrek No. 5, Semarang" // address
         );
         emp1.displayProfile();
         hotel.addEmployee(emp1);
@@ -82,27 +77,30 @@ public class Main {
         // ── 6. Membuat Reservasi ──────────────────────────────────────────────
         System.out.println("\n─── Pembuatan Reservasi ───");
 
-        // Cari kamar yang tersedia
-        Room kamarDipesan = hotel.findRoom("101");
-        Room kamarDeluxe  = hotel.findRoom("D-201");
+        // Cari kamar di bawah Rp 500.000 dengan WiFi dan AC
+        List<Room> murah = hotel.findRoom(500_000, Arrays.asList("AC", "WiFi"), true);
+
+        // Cari kamar Rp 700.000 ke atas dengan Bathtub
+        List<Room> premium = hotel.findRoom(700_000, Arrays.asList("Bathtub"), false);
+
+        Room kamarDipesan = murah.getFirst();
+        Room kamarDeluxe = premium.getFirst();
 
         Reservation res1 = new Reservation(
-            "RES-2025-001",
-            tamu1,
-            kamarDipesan,
-            "2025-07-10",
-            "2025-07-13",
-            ReservationStatus.CONFIRMED
-        );
+                "RES-2025-001",
+                tamu1,
+                kamarDipesan,
+                "2025-07-10",
+                "2025-07-13",
+                ReservationStatus.CONFIRMED);
 
         Reservation res2 = new Reservation(
-            "RES-2025-002",
-            tamu2,
-            kamarDeluxe,
-            "2025-07-12",
-            "2025-07-15",
-            ReservationStatus.CONFIRMED
-        );
+                "RES-2025-002",
+                tamu2,
+                kamarDeluxe,
+                "2025-07-12",
+                "2025-07-15",
+                ReservationStatus.CONFIRMED);
 
         hotel.addReservation(res1);
         hotel.addReservation(res2);
@@ -139,7 +137,7 @@ public class Main {
 
         // ── 10. Demo polymorphism Taxable ─────────────────────────────────────
         System.out.println("\n─── Demo Polimorfisme (Taxable) ───");
-        Room[] semuaKamar = {kamar101, kamarD201};
+        Room[] semuaKamar = { kamar101, kamarD201 };
         for (Room r : semuaKamar) {
             System.out.printf("  Kamar %-6s | Base: Rp %,8.0f | Pajak: Rp %,8.2f | Total: Rp %,8.2f%n",
                     r.getRoomNumber(), r.getBasePrice(), r.calculateTax(), r.calculateTotal());

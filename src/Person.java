@@ -4,32 +4,29 @@ import java.time.format.DateTimeParseException;
 
 public abstract class Person {
 
-    // ── Atribut ──────────────────────────────────────────────────────────────
     protected String name;
-    protected String dateOfBirth; // format: yyyy-MM-dd
+    protected String dateOfBirth;
     protected String gender;
     protected String phoneNumber;
     protected String address;
 
-    // ── Konstruktor ───────────────────────────────────────────────────────────
     public Person() {
-        this.name        = "";
+        this.name = "";
         this.dateOfBirth = "";
-        this.gender      = "";
+        this.gender = "";
         this.phoneNumber = "";
-        this.address     = "";
+        this.address = "";
     }
 
     public Person(String name, String dateOfBirth, String gender,
-                  String phoneNumber, String address) {
-        this.name        = name;
+        String phoneNumber, String address) {
+        this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.gender      = gender;
+        this.gender = gender;
         this.phoneNumber = phoneNumber;
-        this.address     = address;
+        this.address = address;
     }
 
-    // ── Mutator ───────────────────────────────────────────────────────────────
     public void setName(String name) {
         this.name = name;
     }
@@ -42,19 +39,26 @@ public abstract class Person {
         this.address = address;
     }
 
-    // ── Selector ──────────────────────────────────────────────────────────────
-    public String getName()        { return name; }
-    public String getDateOfBirth() { return dateOfBirth; }
-    public String getGender()      { return gender; }
-    public String getPhoneNumber() { return phoneNumber; }
-    public String getAddress()     { return address; }
+    public String getName() {
+        return name;
+    }
 
-    // ── Tambahan ──────────────────────────────────────────────────────────────
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-    /**
-     * Menghitung usia berdasarkan tanggal lahir hingga hari ini.
-     * @return usia dalam tahun, atau -1 jika format tanggal tidak valid
-     */
+    public String getGender() {
+        return gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
     public int countAge() {
         try {
             LocalDate dob = LocalDate.parse(dateOfBirth);
